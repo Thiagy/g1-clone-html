@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G1 - O portal de notícias da Globo</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="shortcut icon" href="src/imgs/favicon/favicong1.png" type="image/x-icon">
+    
+</head>
+<body>
+    <header>
+        <div id="cssmenu">
+            <div class="itemMenu">
+                <div class="itensMenu"></div>
+                <div class="itensMenu"></div>
+                <div class="itensMenu"></div>
+            </div>
+            <div class="menu-titulo">
+                <h4>MENU</h4>
+            </div>
+        </div>
+        <h1 class="logo-g1">g1</h1>
+        <div class="divSearch" >
+            <div id="lupa-header"></div>
+            <input class="search" type="search" name="pesquisa" id="pesquisa" placeholder="BUSCAR">
+        </div>
+    </header>
+    <aside id="menu-header">
+        <a class="link_word_menu" href="#">
+            editorias
+        </a>
+        <a class="link_word_menu" href="#">
+            Eleições
+        </a>
+        <a class="link_word_menu" href="#">
+            regiões
+        </a>
+        <a class="link_word_menu" href="#">
+            telejornais
+        </a>
+        <a class="link_word_menu" href="#">
+            globonews
+        </a>
+       <a class="link_word_menu" href="#">
+            blogsecolunas
+        </a>
+        <a class="link_word_menu" href="#">
+            podcasts
+        </a>
+        <a class="link_word_menu" href="#">
+            serviços
+        </a>
+        <a class="link_word_menu" href="#">
+            videos
+        </a>
+        <a class="link_word_menu" href="#">
+            newsletter
+        </a>
+        <a class="link_word_menu" href="#">
+            webstories
+        </a>
+        <a class="link_word_menu" href="#">
+            especial publicitário
+        </a>
+        <a class="link_word_menu" href="#">
+            princípios editoriais
+        </a>
+        <a class="link_word_menu" href="#">
+            sobre o g1
+        </a>
+        <a class="link_word_menu" href="#">
+            appg1
+        </a>
+        <a class="link_word_menu" href="#">
+            equipe
+        </a>
+        <a class="link_word_menu" href="#">
+            entre em contato
+        </a>
+        <a class="link_word_menu" href="#">
+            termos de uso
+        </a>
+    </aside>
+    <div id="backdrop" ></div>
+    <main>
+        <!--Anúncios de produtos-->
+        <a class="div_marketing" href="#" target="_blank">
+            <img id="marketing" src="./src/imgs/prop/1.png" alt="propaganda do ultra ton">
+        </a>
+        <!--Aqui gera as noícias destaques-->
+        <div id="hightLight"></div>
+        
+        <div class="container">
+            <!--Primeira coluna de notícias -->
+            <div id="box_new_1">
+                <div id="toShowMore">Veja mais</div>
+            </div>
+            <!--Segunda coluna de notícias -->
+            <div id="box_new_2">
+                <h3 style="position: absolute; left: 30px; top: 10px;">Você viu isso?</h4>
+                <hr>
+            </div>
+        </div>     
+    </main>
+    <footer>
+        <div class="footer-g1">
+            <h2>g1</h2>
+            <p>última notícias</p>
+        </div>
+        <div class="div-autor">
+            <p>Clone do g1 by:Thiago Rodrigues</p>
+            <ul>
+                <li>
+                    <a href="#" target="_blank">instagram</a>
+                </li>
+                <li>
+                    <a href="#">Facebook</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script type="module" src="src/functions/baseurl.js"></script>
+    <script type="module" src="src/functions/marketingApi.js"></script>
+    <script type="module" src="src/functions/newApi.js"></script>
+    <script type="module" src="src/index.js"></script>
+    <script type="module" src="src/openmenu.js"></script>
+    <script type="module" src="src/widthsearch.js"></script>
+</body>
+</html>
