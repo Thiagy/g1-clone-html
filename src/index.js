@@ -33,8 +33,9 @@ async function getNews(){
     }
 }
 
+var news 
 document.addEventListener('DOMContentLoaded', async () => {
-    const news = JSON.parse(sessionStorage.getItem('newsArrays'));
+    news = JSON.parse(sessionStorage.getItem('newsArrays'));
 
     if (!news || news.length === 0) {
         await getNews();
