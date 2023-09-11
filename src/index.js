@@ -152,6 +152,8 @@ var index_img_3 = 0;
 async function getNewsHightLight(){
     try {
 
+        if(news){
+
         const array_1 = news.slice(0, 16);
         const array_2 = news.slice(16, 32);
         const array_3 = news.slice(32, 48);
@@ -205,6 +207,9 @@ async function getNewsHightLight(){
         div_hightLight_3.append(img_hight_light_3, text_hight_light_3);
 
         document.getElementById('hightLight').append(div_hightLight_1, div_hightLight_2, div_hightLight_3);
+    }else{
+        return
+    }
 
     } catch (e) {
         console.error(e);
