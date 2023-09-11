@@ -33,8 +33,8 @@ async function getNews(){
     }
 }
 
-
 var news 
+
 document.addEventListener('DOMContentLoaded', async () => {
     //Aqui carrega um array de notícias
     news = JSON.parse(sessionStorage.getItem('newsArrays'));
@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         await getNews();
     }
 })
-
 
 //Aqui obtém um array de notícias
 async function getNewsBoxNew1(){
