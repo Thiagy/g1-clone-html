@@ -19,20 +19,45 @@ setInterval( async()=>{
     await handleImgMarketing()
 }, 12000)
 
+let newsCounter = 0; //Contador de notícias exibidas
+const newsPerPage = 10; //Número de notícias a serem exibidas por vez
 
-let newsCounter = 0; // Contador de notícias exibidas
-const newsPerPage = 7; // Número de notícias a serem exibidas por vez
+async function getNews(){
+    try {
+        const response = await fetch(`https://g1-clone-node-react.onrender.com/news`);
+        const news = await response.json();
+        sessionStorage.setItem('newsArrays', JSON.stringify(news)); 
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async ()=>{
+    await getNews()
+})
+
 
 //Aqui obtém um array de notícias
 async function getNewsBoxNew1(){
 
+    const spinner = document.querySelector('#spinner')
+    const main = document.querySelector('main')
+    const footer = document.querySelector('footer')
+
     try {
 
-        const response = await fetch(`https://g1-clone-node-react.onrender.com/news`);
-        const news = await response.json();
+        const news = JSON.parse(sessionStorage.getItem('newsArrays'));
+
+        if(news){
+            spinner.style.display='none'
+            main.style.display='flex'
+            footer.style.display='flex'
+        }
 
         // Verificar se há mais notícias para exibir
-        if (newsCounter < news.length) {
+        if (newsCounter < news.length){
+
             const remainingNews = news.slice(newsCounter, newsCounter + newsPerPage);
 
             remainingNews.forEach((newsItem) => {
@@ -112,8 +137,6 @@ function createHtmlNew1(newObject, typeNew){
 
 }
 
-
-
 var index_img_1 = 0;
 var index_img_2 = 0;
 var index_img_3 = 0;
@@ -189,7 +212,7 @@ const backdrop = document.getElementById('backdrop');
 btn_menu.addEventListener('click', closeMenu)
 backdrop.addEventListener('click', closeMenu)
 
-function closeMenu() {
+function closeMenu(){
     const menu_header = document.getElementById('menu-header');
     const currentLeft = getComputedStyle(menu_header).getPropertyValue('left');
 
@@ -203,6 +226,11 @@ function closeMenu() {
 }
 
 
+document.addEventListener('DOMContentLoaded', async ()=>{
+    await getNews()
+    await getNewsBoxNew1()
+    
+})
 
 document.getElementById('toShowMore').addEventListener('click', getNewsBoxNew1);
 
@@ -210,9 +238,4 @@ setInterval( async () => {
     await getNewsHightLight()
 
 }, 5000);
-
-document.addEventListener('DOMContentLoaded', async ()=>{
-    await getNewsBoxNew1()
-    
-})
 

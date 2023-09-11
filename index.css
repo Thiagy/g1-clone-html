@@ -21,8 +21,22 @@ header{
     color: white;
     align-items: center;
 }
+#spinner{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+#spinner img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
 main{
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     gap: 5vh;
@@ -33,7 +47,7 @@ footer{
     color: white;
     padding: 2% 2%;
     color: white;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 20px;
 }
