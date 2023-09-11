@@ -33,12 +33,18 @@ async function getNews(){
     }
 }
 
-document.addEventListener('DOMContentLoaded', async ()=>{
-    await getNews()
+
+var news 
+document.addEventListener('DOMContentLoaded', async () => {
+    //Aqui carrega um array de notícias
+    news = JSON.parse(sessionStorage.getItem('newsArrays'));
+
+    //caso 'sessionStorage.getItem('newsArrays')' estiver vazio chamar 'getNews'
+    if (!news || news.length === 0) {
+        await getNews();
+    }
 })
 
-//Aqui é armazenada o array de notícias
-const news = JSON.parse(sessionStorage.getItem('newsArrays'));
 
 //Aqui obtém um array de notícias
 async function getNewsBoxNew1(){
