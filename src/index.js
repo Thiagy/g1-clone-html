@@ -33,12 +33,14 @@ async function getNews(){
     }
 }
 
-document.addEventListener('DOMContentLoaded', async ()=>{
-    await getNews()
+document.addEventListener('DOMContentLoaded', async () => {
+    const news = JSON.parse(sessionStorage.getItem('newsArrays'));
+
+    if (!news || news.length === 0) {
+        await getNews();
+    }
 })
 
-//Aqui é armazenada o array de notícias
-const news = JSON.parse(sessionStorage.getItem('newsArrays'));
 
 //Aqui obtém um array de notícias
 async function getNewsBoxNew1(){
@@ -54,7 +56,7 @@ async function getNewsBoxNew1(){
             spinner.style.display='none'
             main.style.display='flex'
             footer.style.display='flex'
-            
+
         }
 
         // Verificar se há mais notícias para exibir
