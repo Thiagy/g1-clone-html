@@ -205,13 +205,7 @@ async function getNewsHightLight() {
     }
 }
 
-//Função que abre menu
-const btn_menu = document.getElementById('cssmenu')
-const backdrop = document.getElementById('backdrop');
-
-btn_menu.addEventListener('click', closeMenu)
-backdrop.addEventListener('click', closeMenu)
-
+//Função  que permite abrir/fechar o menu
 function closeMenu(){
     const menu_header = document.getElementById('menu-header');
     const currentLeft = getComputedStyle(menu_header).getPropertyValue('left');
@@ -225,17 +219,22 @@ function closeMenu(){
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', async ()=>{
-    await getNews()
+
     await getNewsBoxNew1()
     
 })
 
-document.getElementById('toShowMore').addEventListener('click', getNewsBoxNew1);
+setInterval( async () =>{
 
-setInterval( async () => {
     await getNewsHightLight()
 
 }, 5000);
 
+//Função que abre menu
+const btn_menu = document.getElementById('cssmenu')
+const backdrop = document.getElementById('backdrop');
+
+btn_menu.addEventListener('click', closeMenu)
+backdrop.addEventListener('click', closeMenu)
+document.getElementById('toShowMore').addEventListener('click', getNewsBoxNew1);
