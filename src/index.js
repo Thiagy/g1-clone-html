@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     await getNews()
 })
 
+//Aqui é armazenada o array de notícias
+const news = JSON.parse(sessionStorage.getItem('newsArrays'));
 
 //Aqui obtém um array de notícias
 async function getNewsBoxNew1(){
@@ -47,12 +49,12 @@ async function getNewsBoxNew1(){
 
     try {
 
-        const news = JSON.parse(sessionStorage.getItem('newsArrays'));
-
         if(news){
+
             spinner.style.display='none'
             main.style.display='flex'
             footer.style.display='flex'
+            
         }
 
         // Verificar se há mais notícias para exibir
@@ -141,10 +143,8 @@ var index_img_1 = 0;
 var index_img_2 = 0;
 var index_img_3 = 0;
 //Aqui obtém um array de notícias de destaques
-async function getNewsHightLight() {
+async function getNewsHightLight(){
     try {
-        const response = await fetch(`https://g1-clone-node-react.onrender.com/news`);
-        const news = await response.json();
 
         const array_1 = news.slice(0, 16);
         const array_2 = news.slice(16, 32);
