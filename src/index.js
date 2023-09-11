@@ -33,15 +33,12 @@ async function getNews(){
     }
 }
 
-var news 
-document.addEventListener('DOMContentLoaded', async () => {
-    news = JSON.parse(sessionStorage.getItem('newsArrays'));
-
-    if (!news || news.length === 0) {
-        await getNews();
-    }
+document.addEventListener('DOMContentLoaded', async ()=>{
+    await getNews()
 })
 
+//Aqui é armazenada o array de notícias
+const news = JSON.parse(sessionStorage.getItem('newsArrays'));
 
 //Aqui obtém um array de notícias
 async function getNewsBoxNew1(){
@@ -59,7 +56,7 @@ async function getNewsBoxNew1(){
             footer.style.display='flex'
 
             // Verificar se há mais notícias para exibir
-            if(newsCounter < news.length){
+            if (newsCounter < news.length){
 
                 const remainingNews = news.slice(newsCounter, newsCounter + newsPerPage);
 
@@ -76,17 +73,18 @@ async function getNewsBoxNew1(){
             }
 
             // Esconde o botão 'Veja mais' se não houver mais notícias
-            if(newsCounter >= news.length) {
+            if (newsCounter >= news.length) {
 
                 document.getElementById('toShowMore').style.display = 'none';
 
             }
-
-        }else{
+            
+        } else {
             return
         }
 
-    
+        
+
     } catch (e) {
 
         console.error(e);
@@ -207,7 +205,7 @@ async function getNewsHightLight(){
         div_hightLight_3.append(img_hight_light_3, text_hight_light_3);
 
         document.getElementById('hightLight').append(div_hightLight_1, div_hightLight_2, div_hightLight_3);
-    }else{
+    } else {
         return
     }
 
@@ -232,6 +230,7 @@ function closeMenu(){
 
 document.addEventListener('DOMContentLoaded', async ()=>{
 
+    await getNewsHightLight()
     await getNewsBoxNew1()
     
 })
