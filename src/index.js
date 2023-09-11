@@ -58,32 +58,35 @@ async function getNewsBoxNew1(){
             main.style.display='flex'
             footer.style.display='flex'
 
+            // Verificar se há mais notícias para exibir
+            if(newsCounter < news.length){
+
+                const remainingNews = news.slice(newsCounter, newsCounter + newsPerPage);
+
+                remainingNews.forEach((newsItem) => {
+
+                    //gera notícias na primeira coluna
+                    createHtmlNew1(newsItem, 1);
+                    //gera notícias na segunda coluna
+                    createHtmlNew1(newsItem, 2);
+
+                });
+
+                newsCounter += newsPerPage;
+            }
+
+            // Esconde o botão 'Veja mais' se não houver mais notícias
+            if(newsCounter >= news.length) {
+
+                document.getElementById('toShowMore').style.display = 'none';
+
+            }
+
+        }else{
+            return
         }
 
-        // Verificar se há mais notícias para exibir
-        if (newsCounter < news.length){
-
-            const remainingNews = news.slice(newsCounter, newsCounter + newsPerPage);
-
-            remainingNews.forEach((newsItem) => {
-
-                //gera notícias na primeira coluna
-                createHtmlNew1(newsItem, 1);
-                //gera notícias na segunda coluna
-                createHtmlNew1(newsItem, 2);
-
-            });
-
-            newsCounter += newsPerPage;
-        }
-
-        // Esconde o botão 'Veja mais' se não houver mais notícias
-        if (newsCounter >= news.length) {
-
-            document.getElementById('toShowMore').style.display = 'none';
-
-        }
-
+    
     } catch (e) {
 
         console.error(e);
