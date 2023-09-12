@@ -1,3 +1,4 @@
+import { getNews } from "./newApi.js"
 
 var count_image = 0
 async function handleImgMarketing(){
@@ -15,35 +16,9 @@ async function handleImgMarketing(){
     marketingtag.src = marketings[count_image].image
     
 }
-setInterval( async()=>{
-    await handleImgMarketing()
-}, 12000)
 
 let newsCounter = 0; //Contador de notícias exibidas
 const newsPerPage = 10; //Número de notícias a serem exibidas por vez
-
-async function getNews(){
-    try {
-        const response = await fetch(`https://g1-clone-node-react.onrender.com/news`);
-        const news = await response.json();
-        sessionStorage.setItem('newsArrays', JSON.stringify(news)); 
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-var news 
-
-document.addEventListener('DOMContentLoaded', async () => {
-    //Aqui carrega um array de notícias
-    news = JSON.parse(sessionStorage.getItem('newsArrays'));
-
-    //caso 'sessionStorage.getItem('newsArrays')' estiver vazio chamar 'getNews'
-    if (!news || news.length === 0) {
-        await getNews();
-    }
-})
 
 //Aqui obtém um array de notícias
 async function getNewsBoxNew1(){
@@ -51,6 +26,8 @@ async function getNewsBoxNew1(){
     const spinner = document.querySelector('#spinner')
     const main = document.querySelector('main')
     const footer = document.querySelector('footer')
+
+    const news = await getNews();
 
     try {
 
@@ -87,8 +64,6 @@ async function getNewsBoxNew1(){
         } else {
             return
         }
-
-        
 
     } catch (e) {
 
@@ -153,7 +128,10 @@ var index_img_2 = 0;
 var index_img_3 = 0;
 //Aqui obtém um array de notícias de destaques
 async function getNewsHightLight(){
+
     try {
+
+        const news = await getNews();
 
         if(news){
 
@@ -219,6 +197,21 @@ async function getNewsHightLight(){
     }
 }
 
+document.addEventListener('DOMContentLoaded', async ()=>{
+
+    await getNewsHightLight()
+    await getNewsBoxNew1()
+    
+})
+
+setInterval( async () =>{
+
+    await getNewsHightLight()
+    await handleImgMarketing()
+
+}, 5000);
+
+
 //Função  que permite abrir/fechar o menu
 function closeMenu(){
     const menu_header = document.getElementById('menu-header');
@@ -232,20 +225,6 @@ function closeMenu(){
         backdrop.style.display = 'block';
     }
 }
-
-document.addEventListener('DOMContentLoaded', async ()=>{
-
-    await getNewsHightLight()
-    await getNewsBoxNew1()
-    
-})
-
-setInterval( async () =>{
-
-    await getNewsHightLight()
-
-}, 5000);
-
 //Função que abre menu
 const btn_menu = document.getElementById('cssmenu')
 const backdrop = document.getElementById('backdrop');
