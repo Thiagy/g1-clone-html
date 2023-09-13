@@ -32,13 +32,13 @@ document.addEventListener('DOMContentLoaded', async ()=>{
 
         if(newsArray){
 
+            window.location.reload();
+
             sessionStorage.setItem('newsArray', JSON.stringify(newsArray))
 
             await getNewsHightLight()
             await getNewsBoxNew1()
             await getNewsBoxNew2()
-
-            window.location.reload();
 
             spinner.style.display='none'
             main.style.display='flex'
