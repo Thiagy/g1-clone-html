@@ -1,5 +1,10 @@
 import { getNews } from "./newApi.js"
 
+const spinner = document.querySelector('#spinner')
+const main = document.querySelector('main')
+const footer = document.querySelector('footer')
+
+
 var count_image = 0
 async function handleImgMarketing(){
 
@@ -17,15 +22,42 @@ async function handleImgMarketing(){
     
 }
 
+
 //A fim de evitar várias requisições para o servidor, é feita uma única vez e armazenada em sessionStorage
-document.addEventListener('DOMContentLoaded', async()=>{
+document.addEventListener('DOMContentLoaded', async ()=>{
 
-    const newsArray = await getNews()
+    if(!JSON.parse(sessionStorage.getItem('newsArray'))){
 
-    if(newsArray){
+        const newsArray = await getNews()
 
-        sessionStorage.setItem('newsArray', JSON.stringify(newsArray))
+        if(newsArray){
+
+            sessionStorage.setItem('newsArray', JSON.stringify(newsArray))
+
+            await getNewsHightLight()
+            await getNewsBoxNew1()
+            await getNewsBoxNew2()
+
+            window.location.reload();
+
+            spinner.style.display='none'
+            main.style.display='flex'
+            footer.style.display='flex'
+            
+        }
+
+    } else {
+
+        await getNewsHightLight()
+        await getNewsBoxNew1()
+        await getNewsBoxNew2()
+
+        spinner.style.display='none'
+        main.style.display='flex'
+        footer.style.display='flex'
     }
+
+    
 
 })
 
@@ -34,21 +66,12 @@ var news = JSON.parse(sessionStorage.getItem('newsArray'))
 let newsCounter = 0; //Contador de notícias exibidas
 const newsPerPage = 10; //Número de notícias a serem exibidas por vez
 
-
 //Aqui obtém um array de notícias
 async function getNewsBoxNew1(){
-
-    const spinner = document.querySelector('#spinner')
-    const main = document.querySelector('main')
-    const footer = document.querySelector('footer')
 
     try {
 
         if(news){
-
-            spinner.style.display='none'
-            main.style.display='flex'
-            footer.style.display='flex'
 
             // Verificar se há mais notícias para exibir
             if (newsCounter < news.length){
@@ -88,10 +111,6 @@ var index_box_sec_news = 0
 //Aqui obtém um array de notícias
 async function getNewsBoxNew2(){
 
-    const spinner = document.querySelector('#spinner')
-    const main = document.querySelector('main')
-    const footer = document.querySelector('footer')
-
     try {
 
         if(news){
@@ -111,10 +130,6 @@ async function getNewsBoxNew2(){
             line_sub_box_new_2_1.setAttribute('class', 'line_sub_box_new_2')
             line_sub_box_new_2_2.setAttribute('class', 'line_sub_box_new_2')
             line_sub_box_new_2_3.setAttribute('class', 'line_sub_box_new_2')
-
-            spinner.style.display='none'
-            main.style.display='flex'
-            footer.style.display='flex'
 
             const box_sec_news_1 = news.slice(index_box_sec_news, index_box_sec_news + 5)
             const box_sec_news_2 = news.slice(index_box_sec_news + 6, index_box_sec_news + 11)
@@ -363,12 +378,6 @@ setInterval( async () =>{
     await getNewsHightLight()
     
 }, 5000);
-
-setTimeout( async () =>{
-
-    await getNewsBoxNew1()
-
-}, 1000);
 
 setInterval( async () =>{
 
