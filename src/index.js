@@ -1,21 +1,5 @@
 import { getNews } from "./newApi.js"
 
-
-document.addEventListener('DOMContentLoaded', async()=>{
-
-    const newsArray = await getNews()
-
-    if(newsArray){
-
-        sessionStorage.setItem('newsArray', JSON.stringify(newsArray))
-        await getNewsHightLight()
-        await getNewsBoxNew1()
-        await getNewsBoxNew2()
-
-    }
-    
-})
-
 var count_image = 0
 async function handleImgMarketing(){
 
@@ -33,11 +17,24 @@ async function handleImgMarketing(){
     
 }
 
+//A fim de evitar várias requisições para o servidor, é feita uma única vez e armazenada em sessionStorage
+document.addEventListener('DOMContentLoaded', async()=>{
+
+    const newsArray = await getNews()
+
+    if(newsArray){
+
+        sessionStorage.setItem('newsArray', JSON.stringify(newsArray))
+    }
+
+})
+
+var news = JSON.parse(sessionStorage.getItem('newsArray'))
+
 let newsCounter = 0; //Contador de notícias exibidas
 const newsPerPage = 10; //Número de notícias a serem exibidas por vez
 
 
-var news = JSON.parse(sessionStorage.getItem('newsArray'))
 //Aqui obtém um array de notícias
 async function getNewsBoxNew1(){
 
@@ -86,7 +83,6 @@ async function getNewsBoxNew1(){
 
     }
 }
-
 
 var index_box_sec_news = 0
 //Aqui obtém um array de notícias
@@ -368,11 +364,11 @@ setInterval( async () =>{
     
 }, 5000);
 
-setInterval( async () =>{
+setTimeout( async () =>{
 
     await getNewsBoxNew1()
 
-}, 5000);
+}, 1000);
 
 setInterval( async () =>{
 
